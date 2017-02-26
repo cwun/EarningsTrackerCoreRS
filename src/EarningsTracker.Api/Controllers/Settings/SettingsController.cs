@@ -7,6 +7,7 @@ using EarningsTracker.Services.Settings;
 
 namespace EarningsTracker.Api.Controllers.Settings
 {
+    // api/settings/1
     [Route("api/[controller]/{officeId:int}")]
     public class SettingsController : Controller
     {
@@ -25,6 +26,7 @@ namespace EarningsTracker.Api.Controllers.Settings
             return Ok(result);
         }
 
+        // PUT: api/settings/1
         [HttpPut]
         public async Task<IActionResult> UpdateIncomeByOfficeId(int officeId, [FromBody]Setting item)
         {

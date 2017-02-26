@@ -34,6 +34,7 @@ namespace EarningsTracker.Services.Settings
         {
             return await _repo.WithConnection(async c =>
             {
+                // create a list of input parameters
                 var p = new DynamicParameters();
                 p.Add("Id", item.Id, DbType.Int32);
                 p.Add("Revenue2013", item.Revenue2013, DbType.Decimal);
@@ -46,6 +47,7 @@ namespace EarningsTracker.Services.Settings
                 p.Add("Profit2016", item.Profit2016, DbType.Decimal);
                 p.Add("Revenue2017", item.Revenue2017, DbType.Decimal);
                 p.Add("Profit2017", item.Profit2017, DbType.Decimal);
+                // return a scalar value from stored procedure
                 var result = await c.ExecuteScalarAsync<int>("UpdateIncomePerOffice", p, commandType: CommandType.StoredProcedure);
                 return result;
             });
