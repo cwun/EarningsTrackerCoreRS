@@ -258,7 +258,7 @@ AS
 	SET			Revenue2014 = i.Revenue
 				,Profit2014 = i.Profit
 	FROM		@MyTable t
-	INNER JOIN	[dbo].[fnGetYearlyIncomePerOffice] (@Id, 2013) AS i
+	INNER JOIN	[dbo].[fnGetYearlyIncomePerOffice] (@Id, 2014) AS i
 		ON		t.id = i.id
 
 	/* 2015 */
@@ -298,13 +298,14 @@ CREATE PROCEDURE [dbo].[UpdateYearlyIncomePerOffice]
 	,@Year			INT
 	,@Revenue		MONEY
 	,@Profit		MONEY
+	,@UpdatedUTC	DATETIME2
 AS
 	SET NOCOUNT ON;
 
 	UPDATE	dbo.income
 	SET		revenue = @Revenue
 			,profit = @Profit
-			,updated_utc = SYSUTCDATETIME() 
+			,updated_utc = @UpdatedUTC
 	WHERE	office_id = @OfficeId
 	AND		[year] = @Year
 
@@ -329,15 +330,22 @@ CREATE PROCEDURE [dbo].[UpdateIncomePerOffice]
 AS
 	SET NOCOUNT ON;
 
-	EXEC [dbo].[UpdateYearlyIncomePerOffice] @Id, 2013, @Revenue2013, @Profit2013
+	DECLARE @Today AS DateTime2 = SYSUTCDATETIME()
 
-	EXEC [dbo].[UpdateYearlyIncomePerOffice] @Id, 2014, @Revenue2014, @Profit2014
+	EXEC [dbo].[UpdateYearlyIncomePerOffice] @Id, 2013, @Revenue2013, @Profit2013, @Today
 
-	EXEC [dbo].[UpdateYearlyIncomePerOffice] @Id, 2015, @Revenue2015, @Profit2015
+	EXEC [dbo].[UpdateYearlyIncomePerOffice] @Id, 2014, @Revenue2014, @Profit2014, @Today
 
-	EXEC [dbo].[UpdateYearlyIncomePerOffice] @Id, 2016, @Revenue2016, @Profit2016
+	EXEC [dbo].[UpdateYearlyIncomePerOffice] @Id, 2015, @Revenue2015, @Profit2015, @Today
 
-	EXEC [dbo].[UpdateYearlyIncomePerOffice] @Id, 2017, @Revenue2017, @Profit2017
+	EXEC [dbo].[UpdateYearlyIncomePerOffice] @Id, 2016, @Revenue2016, @Profit2016, @Today
+
+	EXEC [dbo].[UpdateYearlyIncomePerOffice] @Id, 2017, @Revenue2017, @Profit2017, @Today
+
+	SELECT COUNT(1)
+	FROM	dbo.income
+	WHERE	office_id = @Id
+	AND		updated_utc = @Today
 
 GO
 

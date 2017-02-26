@@ -17,7 +17,7 @@ namespace EarningsTracker.Services.Settings
 
         public async Task<Setting> GetIncomePerOfficeAsync(int officeId)
         {
-            // execute the stored procedure called GetSettings
+            // execute the stored procedure called GetIncomePerOffice
             return await _repo.WithConnection(async c =>
             {
                 var p = new DynamicParameters();
@@ -32,6 +32,7 @@ namespace EarningsTracker.Services.Settings
 
         public async Task<int> UpdateIncomePerOfficeAsync(Setting item)
         {
+            // execute the stored procedure called UpdateIncomePerOffice
             return await _repo.WithConnection(async c =>
             {
                 // create a list of input parameters

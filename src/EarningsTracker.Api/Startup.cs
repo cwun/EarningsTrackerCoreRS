@@ -66,9 +66,10 @@ namespace EarningsTracker.Api
             loggerFactory.AddConsole(this.Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
 
-            app.UseMvc();
-
+            // IMPORTANT: Make sure app.UseCors() is called BEFORE app.UseMvc()
             app.UseCors("AllowAllOrigins");
+
+            app.UseMvc();
 
             // If you want to dispose of resources that have been resolved in the
             // application container, register for the "ApplicationStopped" event.
