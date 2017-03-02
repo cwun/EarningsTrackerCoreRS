@@ -28,7 +28,7 @@ namespace EarningsTracker.Api.Controllers.Settings
 
         // PUT: api/settings/1
         [HttpPut]
-        public async Task<IActionResult> UpdateIncomeByOfficeId(int officeId, [FromBody]Setting item)
+        public async Task<IActionResult> UpdateIncomeByOfficeId(int officeId, [FromBody]Income item)
         {
             var result = await _service.UpdateIncomePerOfficeAsync(item);
 

@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace EarningsTracker.Services.Settings
 {
-    public class Setting : ISetting
+    public class Income : IIncome
     {
         [Key]
         public int Id { get; set; }

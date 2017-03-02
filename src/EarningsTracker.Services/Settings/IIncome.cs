@@ -2,7 +2,7 @@
 
 namespace EarningsTracker.Services.Settings
 {
-    public interface ISetting
+    public interface IIncome
     {
         int Id { get; set; }
         string Name { get; set; }

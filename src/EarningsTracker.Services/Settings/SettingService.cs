@@ -15,7 +15,7 @@ namespace EarningsTracker.Services.Settings
             _repo = repo;
         }
 
-        public async Task<Setting> GetIncomePerOfficeAsync(int officeId)
+        public async Task<Income> GetIncomePerOfficeAsync(int officeId)
         {
             // execute the stored procedure called GetIncomePerOffice
             return await _repo.WithConnection(async c =>
@@ -24,13 +24,13 @@ namespace EarningsTracker.Services.Settings
                 // make sure "Id" is being used since this is the name of the input parameter of the stored procedure
                 p.Add("Id", officeId, DbType.Int32);
                 // map the result from stored procedure to Setting data model
-                var result = await c.QueryAsync<Setting>("GetIncomePerOffice", p, commandType: CommandType.StoredProcedure);
+                var result = await c.QueryAsync<Income>("GetIncomePerOffice", p, commandType: CommandType.StoredProcedure);
                 // return first record or NULL
                 return result.FirstOrDefault();
             });
         }
 
-        public async Task<int> UpdateIncomePerOfficeAsync(Setting item)
+        public async Task<int> UpdateIncomePerOfficeAsync(Income item)
         {
             // execute the stored procedure called UpdateIncomePerOffice
             return await _repo.WithConnection(async c =>

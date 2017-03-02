@@ -4,7 +4,7 @@ namespace EarningsTracker.Services.Settings
 {
     public interface ISettingService
     {
-        Task<Setting> GetIncomePerOfficeAsync(int id);
-        Task<int> UpdateIncomePerOfficeAsync(Setting item);
+        Task<Income> GetIncomePerOfficeAsync(int id);
+        Task<int> UpdateIncomePerOfficeAsync(Income item);
     }
 }
