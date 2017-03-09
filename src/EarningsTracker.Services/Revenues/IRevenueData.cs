@@ -6,7 +6,7 @@
         // name of a specific office
         string Name { get; set; }
         // total revenue percent for a specific office
-        int Percent { get; set; }
+        decimal Percent { get; set; }
         // total revenue amount for a specific office
         decimal Revenue { get; set; }
         // total revenue amount for other offices

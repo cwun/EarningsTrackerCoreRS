@@ -157,7 +157,7 @@ AS
 
 	SELECT      office_id AS [Id] 
 			    ,office AS [Name] 
-				,(@Revenue * 100 / @TotalRevenue) AS [Percent]
+				,ROUND(@Revenue * 100 / @TotalRevenue, 1, 1) AS [Percent]
 				,@Revenue AS [Revenue]
 				,@TotalRevenue - @Revenue AS [Others]
 	FROM        dbo.office
